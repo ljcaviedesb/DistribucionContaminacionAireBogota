@@ -101,139 +101,153 @@ double LatticeBoltzmann::S(int ix, int iy, int t){
   else{
     return 0*t;
   }*/
-  
-  //Autopistas en el sur
+ if(iy==60 && (ix >45 && ix<90)){
+    return 0.5; // Auto Sur
+  }
   if(iy==120 && (ix >0 && ix<132)){
-    return 1;
+    return 0.5;  // Cll 13
   }
-  if((ix==45 || ix ==90) && (iy>0 && iy<120)){
-    return 1; 
+  if(ix==55  && (iy>0 && iy<250)){
+    return 0.5;  // Av Boyaca
   }
-  if(iy==60 && (ix >45 && ix<90)){
-    return 1;
+  if(iy==48 && (ix >130 && ix<180)){
+    return 0.3; // cra 16 (parece mas calle)
   }
-  
-  //kennedy<<
-  if(ix==60 && (iy >120 && iy<270)){
-      return 1  ;
+  if(iy==100 && (ix >130 && ix<180)){
+    return 0.4; // cll 1
   }
-  if(ix==20 && (iy >120 && iy<200)){
-      return 1  ;
+  if(iy==160 && (ix >20 && ix<180)){
+    return 0.3  ; // Av cll 26
   }
-  if(ix==110 && (iy >120 && iy<180)){
-      return 1;
+  if(iy==250 && (ix >80 && ix<180)){
+    return 0.4;   // Cll 80
   }
   if(ix==150 && (iy >120 && iy<170)){
-      return 1;
+    return 0.5;  // cra 30
   }
-  if(iy==200 && (ix >20 && ix<60)){
-      return 1;
+  if(ix==80 && (iy >45 && iy<310)){
+    return 0.5; // cra 68
   }
-  if(iy==170 && (ix >60 && ix<150)){
-      return 1;
+  if(iy==250 && (ix >80 && ix<180)){
+    return 0.3; // cll 100
   }
-  
-  //teusaquillo, engativá y chapinero
-  if(ix==80 && (iy >150 && iy<310)){
-    return 1;
+  if(ix==90 && (iy >0 && iy<60)){
+    return 0.4; //cll 51 sur
   }
-  if(ix==130 && (iy >150 && iy<270)){
-    return 1;
+  if(ix==130 && (iy >10 && ix<100)){
+    return 0.4; // cra 10
   }
-  if(iy==180 && (ix >80 && ix<130)){
-    return 1;
+  if(ix==140 && (iy >120 && iy<200)){
+    return 0.3;  //caracas
   }
-  if(iy==220 && (ix >0 && ix<130)){
-    return 1;
+  if(ix==145 && (iy >250 && ix<400)){
+    return 0.4;     //autonorte
   }
-  if(iy==250 && (ix >70 && ix<170)){
-    return 1;
+  if(ix==30 && (iy >270 && iy<400)){
+    return 0.5;     // Cali
   }
-  if(iy==310 && (ix >70 && ix<180)){
-    return 1;
-  }
-  if(iy==295 && (ix >100 && ix<170)){
-    return 1;
-  }
-  if(ix==80 && (iy >220 && iy<310)){
-    return 1;
-  }
-  if(ix==95 && (iy >220 && iy<310)){
-    return 1;
-  }
-   //autonorte
-  if(ix==145 && (iy >220 && iy<400)){
-    return 1;
-  }
-  if(ix==175 && (iy >220 && iy<400)){
-    return 1;
-  }
-  if(ix==100 && (iy >220 && iy<350)){
-    return 1;
+  if(iy==100 && (ix >10 && ix<150)){
+    return 0.3; //suba
   }
   
   
   //Fabricas
   if((ix>=138 && ix<=140) && (iy>=270 && iy<=272)){
-    return 10;            // Bavaria cra 53 # 127
+    return 0.5;            // Bavaria cra 53 # 127
   }
   if((iy>=177 && iy<=179) && (ix>=50 && ix<=52)){
-    return 10;            // Industria Nacional de Gaseosas cll 25 # 95
+    return 0.5;            // Industria Nacional de Gaseosas cll 25 # 95
   }
   if((iy>=100 && iy<=102) && (ix>=70 && ix<=72)){
-    return 10;            // General motors cll 56sur # 36
+    return 0.5;            // General motors cll 56sur # 36
   }
   if((iy>=150 && iy<=152) && (ix>=160 && ix<=162)){
-    return 10;            // Diana cra 13 #93
+    return 0.5;            // Diana cra 13 #93
   }
   if((iy>=245 && iy<=247) && (ix>=145 && ix<=147)){
-    return 10;            // Nestle diag 92 # (cra)19
+    return 0.5;            // Nestle diag 92 # (cra)19
   }
   if((ix>=90 && ix<=92) && (iy>=157 && iy<=159)){
-    return 10;            // Cavisan Grupo Sas Calle 2A # 53
+    return 0.5;            // Cavisan Grupo Sas Calle 2A # 53
   }
   if((ix>=29 && ix<=31) && (iy>=154 && iy<=156)){
-    return 10;            //Mezcladores Industriales Cra 2 # 5
+    return 0.5;            //Mezcladores Industriales Cra 2 # 5
   }
   if((ix>=38 && ix<=40) && (iy>=233 && iy<=235)){
-    return 10;            // Fabrica Maquinarias  cl 64 # 110 38,233
+    return 0.5;            // Fabrica Maquinarias  cl 64 # 110 38,233
   }
   if((ix>=134 && ix<=136) && (iy>=369 && iy<=371)){
-    return 10;            // Fabrica Productos Limpieza  cra 12-187 134,369
+    return 0.5;            // Fabrica Productos Limpieza  cra 12-187 134,369
   }
   
   
   //FUENTES INDUSTRIALES 
   
   //TUNJUELITO
-  if((ix>45 && iy>60) && (ix<80 && iy<120)){
+  if((ix>55 && iy>0) && (ix<90 && iy<60)){
     return 1;
   }
   //PUENTE ARANDA
   if((ix>70 && iy>120) && (ix<110 && iy<170)){
-    return 2.1;
+    return 0.49; //16.51
   }
   //Kenedy
-  if((ix>20 && iy>120) && (ix<70 && iy<170)){
-    return 1.8;
+  if((ix>0 && iy>60) && (ix<80 && iy<120)){
+    return 0.61; //20.60
   }
   //Fontibon
-  if((ix>20 && iy>170) && (ix<80 && iy<200)){
-     return 2.3;
+  if((ix>0 && iy>120) && (ix<80 && iy<160)){
+    return 0.57;//19.05
   }
   //Engativa
-  if((ix>22 && iy>200) && (ix<80 && iy<250)){
-    return 1.3;
+  if((ix>0 && iy>160) && (ix<80 && iy<250)){
+    return 0.46; //15.38
   }
   //Usaquen 
   if((ix>145 && iy>250) && (ix<180 && iy<400)){
-    return 0.6;
+    return 0.37; //12.49
   }
  //Suba
- if((ix>50 && iy>250) && (ix<145 && iy<400)){
-   return 0.5;
+ if((ix>0 && iy>250) && (ix<145 && iy<400)){
+   return 0.45; //15.33
  }
- 
+ // Colina
+ if((ix>0 && iy>250) && (ix<145 && iy<400)){
+   return 0.45; //15.33
+ }
+ // cIUDAD bOLIVAR
+ if((ix>0 && iy>0) && (ix<55 && iy<60)){
+   return 0.57; //19.30
+  }
+ // Carvajal -Sevillana
+ if((ix>040 && iy>50) && (ix<65 && iy<70)){
+   return 1; //33.40
+  }
+ // San Cristobal
+ if (ix>130 && ix <180 && iy>48 && ix<100){
+   return 0.42;
+ }
+ // Colina
+ if (ix>100 && ix<120 && iy>270 && iy<340){
+   return 0.32; //10.94
+ }
+ // Barrios Unidos
+ if(ix>80 && ix<145 && ix>250 && ix<250){
+   return 0.42; //14.92
+ }
+ // Chapinero
+ if(ix>140 && ix<180 && iy>140 && iy<250){
+   return 0.54; //18.31
+ }
+ // Centro
+ if(ix>140 && ix<180 && iy>100 && iy<160){
+   return 0.42; //14.92
+ }
+ // Tunal
+ if(ix>90 && ix<120 && iy>50 && iy<100){
+   return 0.58; //19.39
+ }
+  
  else
    return 0;
 } 
