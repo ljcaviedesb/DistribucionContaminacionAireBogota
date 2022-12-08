@@ -1,4 +1,4 @@
-.*
+*.gitignore
 *.dat
 *.out
 *.csv
