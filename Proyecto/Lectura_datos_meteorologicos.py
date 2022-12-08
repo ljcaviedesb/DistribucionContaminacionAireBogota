@@ -52,7 +52,6 @@ for file in files:
         df2=df2[df2.iloc[:,2]!='----'] 
         df2=df2[df2.iloc[:,3]!='----']
     for i in range(int(len(list(df2.columns))/2)):
-        print(stations[i])
         Vel_Viento[stations[i]]=list(df2.iloc[:,i*2])
         Vel_Viento[stations[i]]=np.array([x for x in Vel_Viento[stations[i]] if x!='----'])
         Dir_Viento[stations[i]]=list(df2.iloc[:,i*2+1])
@@ -100,7 +99,6 @@ stations_grid={'Carvajal - Sevillana':[70,125],
 wind_speed_x=np.zeros((180,400))
 wind_speed_y=np.zeros((180,400))
 for key in list(stations_grid.keys()):
-    print(key)
     x=stations_grid[key][0]
     y=stations_grid[key][1]
     A_x=Vel_Media_x[key]
