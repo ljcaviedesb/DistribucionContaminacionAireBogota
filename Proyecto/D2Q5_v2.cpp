@@ -98,6 +98,7 @@ double LatticeBoltzmann::S(int ix, int iy, int t){
   else{
     return 0*t;
   }*/
+  
   //Autopistas en el sur
   if(iy==120 && (ix >0 && ix<132)){
     return 1;
@@ -152,86 +153,86 @@ double LatticeBoltzmann::S(int ix, int iy, int t){
     return 1;
   }
   if(ix==80 && (iy >220 && iy<310)){
-     return 1;
-   }
-   if(ix==95 && (iy >220 && iy<310)){
-     return 1;
-   }
+    return 1;
+  }
+  if(ix==95 && (iy >220 && iy<310)){
+    return 1;
+  }
    //autonorte
-   if(ix==145 && (iy >220 && iy<400)){
-      return 1;
-   }
-   if(ix==175 && (iy >220 && iy<400)){
-     return 1;
-   }
-   if(ix==100 && (iy >220 && iy<350)){
+  if(ix==145 && (iy >220 && iy<400)){
+    return 1;
+  }
+  if(ix==175 && (iy >220 && iy<400)){
+    return 1;
+  }
+  if(ix==100 && (iy >220 && iy<350)){
     return 1;
   }
   
-   /*
-  //Fabricas
-  if(ix==138 && iy==270){
-    return 1;            // Bavaria cra 53 # 127
-  }
-  if(iy==177 && ix==50){
-    return 1;            // Industria Nacional de Gaseosas cll 25 # 95
-  }
-  if(iy==100 && ix==80){
-    return 1;            // General motors cll 56sur # 36
-  }
-  if(iy==150 && ix==160){
-    return 1;            // Diana cra 13 #93
-  }
-  if(iy==245 && ix==145){
-    return 1;            // Nestle diag 92 # (cra)19
-    }*/
-
-
-  //FUENTES INDUSTRIALES 
-
-  //TUNJUELITO
   
+  //Fabricas
+  if((ix>=138 && ix<=140) && (iy>=270 && iy<=272)){
+    return 10;            // Bavaria cra 53 # 127
+  }
+  if((iy>=177 && iy<=179) && (ix>=50 && ix<=52)){
+    return 10;            // Industria Nacional de Gaseosas cll 25 # 95
+  }
+  if((iy>=100 && iy<=102) && (ix>=70 && ix<=72)){
+    return 10;            // General motors cll 56sur # 36
+  }
+  if((iy>=150 && iy<=152) && (ix>=160 && ix<=162)){
+    return 10;            // Diana cra 13 #93
+  }
+  if((iy>=245 && iy<=247) && (ix>=145 && ix<=147)){
+    return 10;            // Nestle diag 92 # (cra)19
+  }
+  if((ix>=90 && ix<=92) && (iy>=157 && iy<=159)){
+    return 10;            // Cavisan Grupo Sas Calle 2A # 53
+  }
+  if((ix>=29 && ix<=31) && (iy>=154 && iy<=156)){
+    return 10;            //Mezcladores Industriales Cra 2 # 5
+  }
+  if((ix>=38 && ix<=40) && (iy>=233 && iv<=235)){
+    return 10;            // Fabrica Maquinarias  cl 64 # 110 38,233
+  }
+  if((ix>=134 && ix<=136) && (iy>=369 && iv<=371)){
+    return 10;            // Fabrica Productos Limpieza  cra 12-187 134,369
+  }
+  
+  
+  //FUENTES INDUSTRIALES 
+  
+  //TUNJUELITO
   if((ix>45 && iy>60) && (ix<80 && iy<120)){
     return 1;
   }
-
   //PUENTE ARANDA
-  
   if((ix>70 && iy>120) && (ix<110 && iy<170)){
     return 2.1;
   }
-
   //Kenedy
-  
   if((ix>20 && iy>120) && (ix<70 && iy<170)){
     return 1.8;
   }
-
   //Fontibon
-   if((ix>20 && iy>170) && (ix<80 && iy<200)){
+  if((ix>20 && iy>170) && (ix<80 && iy<200)){
      return 2.3;
   }
-
-   //Engativa
-   
-   if((ix>22 && iy>200) && (ix<80 && iy<250)){
-     return 1.3;
- }
-   
-   //Usaquen
-   
- if((ix>145 && iy>250) && (ix<180 && iy<400)){
-   return 0.6;
- }
- 
+  //Engativa
+  if((ix>22 && iy>200) && (ix<80 && iy<250)){
+    return 1.3;
+  }
+  //Usaquen 
+  if((ix>145 && iy>250) && (ix<180 && iy<400)){
+    return 0.6;
+  }
  //Suba
-
  if((ix>50 && iy>250) && (ix<145 && iy<400)){
    return 0.5;
  }
  
-  else
-    return 0;
+ else
+   return 0;
 } 
 //Forzamiento LBGK
 double LatticeBoltzmann::Si(int ix, int iy, double Ux0, double Uy0, int t, int i){
@@ -339,6 +340,6 @@ int main(void){
   }
   //Imprima
   Ondas.Print("datos.dat");
-
+  //  cout<<"set pm3d map\n"<<"set size ratio 2\n"<<"set palette defined (0\"#fee0d2\", 1\"#fc9272\", 2\"#de2d26\")\n"<<"set xtics 0,30,180\n"<<"set terminal jpeg enhanced"<<"set output \"try1.jpg\"\n"<<"splot \"datos.dat\n\""<<endl;
   return 0;
 }
