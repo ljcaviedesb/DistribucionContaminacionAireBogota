@@ -192,10 +192,10 @@ double LatticeBoltzmann::S(int ix, int iy, int t){
   if((ix>=29 && ix<=31) && (iy>=154 && iy<=156)){
     return 10;            //Mezcladores Industriales Cra 2 # 5
   }
-  if((ix>=38 && ix<=40) && (iy>=233 && iv<=235)){
+  if((ix>=38 && ix<=40) && (iy>=233 && iy<=235)){
     return 10;            // Fabrica Maquinarias  cl 64 # 110 38,233
   }
-  if((ix>=134 && ix<=136) && (iy>=369 && iv<=371)){
+  if((ix>=134 && ix<=136) && (iy>=369 && iy<=371)){
     return 10;            // Fabrica Productos Limpieza  cra 12-187 134,369
   }
   
