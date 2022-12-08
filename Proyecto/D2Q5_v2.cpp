@@ -357,9 +357,10 @@ void read_data(std::vector<double>& speed_x, std::vector<double>& speed_y){
 //-----Programa Principal-----
 
 int main(void){
+
   std::vector<double> speed_x, speed_y;
   read_data(speed_x,speed_y);
-
+  //Para leer el dato de viento de la posición [i,j] basta con hacer speed_x[n_viento(i,j)] y speed_y[n_viento(i,j)]
   LatticeBoltzmann Ondas;
   int t, tmax = 2;
   double rho0 = 1.0, Ux0 = 0.2, Uy0 = 0.0; 
