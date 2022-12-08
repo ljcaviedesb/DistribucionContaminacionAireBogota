@@ -6,6 +6,9 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <string>
+#include <vector>
+#include <sstream>
 using namespace std;
 
 //-----Constantes Globales-----//
@@ -324,9 +327,39 @@ void LatticeBoltzmann::Print(const char * NameFile){
   MyFile.close();
 }
 
+//Read Data
+int n_viento(int i, int j){
+    return j*180+i;
+}
+
+void read_data(std::vector<double>& speed_x, std::vector<double>& speed_y){
+    std::string input_line_x, input_line_y;
+    std::ifstream data_x,data_y;
+    std::string segment;
+    data_x.open("viento_x.csv");
+    data_y.open("viento_y.csv");
+    
+    getline(data_x,input_line_x);
+    getline(data_y,input_line_y);
+    std::stringstream line_x(input_line_x);
+    std::stringstream line_y(input_line_y);
+    while (std::getline(line_x,segment,',')){
+        speed_x.push_back(std::stod(segment));
+    }
+    while (std::getline(line_y,segment,',')){
+        speed_y.push_back(std::stod(segment));
+    }
+    data_x.close();
+    data_y.close();
+}
+
+
 //-----Programa Principal-----
 
 int main(void){
+  std::vector<double> speed_x, speed_y;
+  read_data(speed_x,speed_y);
+
   LatticeBoltzmann Ondas;
   int t, tmax = 2;
   double rho0 = 1.0, Ux0 = 0.2, Uy0 = 0.0; 
