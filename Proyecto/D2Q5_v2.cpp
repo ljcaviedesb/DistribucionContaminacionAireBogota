@@ -358,10 +358,10 @@ void read_data(std::vector<double>& speed_x, std::vector<double>& speed_y){
     std::stringstream line_x(input_line_x);
     std::stringstream line_y(input_line_y);
     while (std::getline(line_x,segment,',')){
-        speed_x.push_back(std::stod(segment));
+        speed_x.push_back(std::stod(segment)/157.0);
     }
     while (std::getline(line_y,segment,',')){
-        speed_y.push_back(std::stod(segment));
+        speed_y.push_back(std::stod(segment)/157.0);
     }
     data_x.close();
     data_y.close();
