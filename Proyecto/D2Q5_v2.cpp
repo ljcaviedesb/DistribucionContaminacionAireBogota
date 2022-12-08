@@ -6,6 +6,9 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <string>
+#include <vector>
+#include <sstream>
 using namespace std;
 
 //-----Constantes Globales-----//
@@ -98,140 +101,155 @@ double LatticeBoltzmann::S(int ix, int iy, int t){
   else{
     return 0*t;
   }*/
-  //Autopistas en el sur
+ if(iy==60 && (ix >45 && ix<90)){
+    return 0.5; // Auto Sur
+  }
   if(iy==120 && (ix >0 && ix<132)){
-    return 1;
+    return 0.5;  // Cll 13
   }
-  if((ix==45 || ix ==90) && (iy>0 && iy<120)){
-    return 1; 
+  if(ix==55  && (iy>0 && iy<250)){
+    return 0.5;  // Av Boyaca
   }
-  if(iy==60 && (ix >45 && ix<90)){
-    return 1;
+  if(iy==48 && (ix >130 && ix<180)){
+    return 0.3; // cra 16 (parece mas calle)
   }
-  
-  //kennedy<<
-  if(ix==60 && (iy >120 && iy<270)){
-      return 1  ;
+  if(iy==100 && (ix >130 && ix<180)){
+    return 0.4; // cll 1
   }
-  if(ix==20 && (iy >120 && iy<200)){
-      return 1  ;
+  if(iy==160 && (ix >20 && ix<180)){
+    return 0.3  ; // Av cll 26
   }
-  if(ix==110 && (iy >120 && iy<180)){
-      return 1;
+  if(iy==250 && (ix >80 && ix<180)){
+    return 0.4;   // Cll 80
   }
   if(ix==150 && (iy >120 && iy<170)){
-      return 1;
+    return 0.5;  // cra 30
   }
-  if(iy==200 && (ix >20 && ix<60)){
-      return 1;
+  if(ix==80 && (iy >45 && iy<310)){
+    return 0.5; // cra 68
   }
-  if(iy==170 && (ix >60 && ix<150)){
-      return 1;
+  if(iy==250 && (ix >80 && ix<180)){
+    return 0.3; // cll 100
   }
-  
-  //teusaquillo, engativá y chapinero
-  if(ix==80 && (iy >150 && iy<310)){
-    return 1;
+  if(ix==90 && (iy >0 && iy<60)){
+    return 0.4; //cll 51 sur
   }
-  if(ix==130 && (iy >150 && iy<270)){
-    return 1;
+  if(ix==130 && (iy >10 && ix<100)){
+    return 0.4; // cra 10
   }
-  if(iy==180 && (ix >80 && ix<130)){
-    return 1;
+  if(ix==140 && (iy >120 && iy<200)){
+    return 0.3;  //caracas
   }
-  if(iy==220 && (ix >0 && ix<130)){
-    return 1;
+  if(ix==145 && (iy >250 && ix<400)){
+    return 0.4;     //autonorte
   }
-  if(iy==250 && (ix >70 && ix<170)){
-    return 1;
+  if(ix==30 && (iy >270 && iy<400)){
+    return 0.5;     // Cali
   }
-  if(iy==310 && (ix >70 && ix<180)){
-    return 1;
-  }
-  if(iy==295 && (ix >100 && ix<170)){
-    return 1;
-  }
-  if(ix==80 && (iy >220 && iy<310)){
-     return 1;
-   }
-   if(ix==95 && (iy >220 && iy<310)){
-     return 1;
-   }
-   //autonorte
-   if(ix==145 && (iy >220 && iy<400)){
-      return 1;
-   }
-   if(ix==175 && (iy >220 && iy<400)){
-     return 1;
-   }
-   if(ix==100 && (iy >220 && iy<350)){
-    return 1;
+  if(iy==100 && (ix >10 && ix<150)){
+    return 0.3; //suba
   }
   
-   /*
+  
   //Fabricas
-  if(ix==138 && iy==270){
-    return 1;            // Bavaria cra 53 # 127
+  if((ix>=138 && ix<=140) && (iy>=270 && iy<=272)){
+    return 0.5;            // Bavaria cra 53 # 127
   }
-  if(iy==177 && ix==50){
-    return 1;            // Industria Nacional de Gaseosas cll 25 # 95
+  if((iy>=177 && iy<=179) && (ix>=50 && ix<=52)){
+    return 0.5;            // Industria Nacional de Gaseosas cll 25 # 95
   }
-  if(iy==100 && ix==80){
-    return 1;            // General motors cll 56sur # 36
+  if((iy>=100 && iy<=102) && (ix>=70 && ix<=72)){
+    return 0.5;            // General motors cll 56sur # 36
   }
-  if(iy==150 && ix==160){
-    return 1;            // Diana cra 13 #93
+  if((iy>=150 && iy<=152) && (ix>=160 && ix<=162)){
+    return 0.5;            // Diana cra 13 #93
   }
-  if(iy==245 && ix==145){
-    return 1;            // Nestle diag 92 # (cra)19
-    }*/
-
-
-  //FUENTES INDUSTRIALES 
-
-  //TUNJUELITO
+  if((iy>=245 && iy<=247) && (ix>=145 && ix<=147)){
+    return 0.5;            // Nestle diag 92 # (cra)19
+  }
+  if((ix>=90 && ix<=92) && (iy>=157 && iy<=159)){
+    return 0.5;            // Cavisan Grupo Sas Calle 2A # 53
+  }
+  if((ix>=29 && ix<=31) && (iy>=154 && iy<=156)){
+    return 0.5;            //Mezcladores Industriales Cra 2 # 5
+  }
+  if((ix>=38 && ix<=40) && (iy>=233 && iy<=235)){
+    return 0.5;            // Fabrica Maquinarias  cl 64 # 110 38,233
+  }
+  if((ix>=134 && ix<=136) && (iy>=369 && iy<=371)){
+    return 0.5;            // Fabrica Productos Limpieza  cra 12-187 134,369
+  }
   
-  if((ix>45 && iy>60) && (ix<80 && iy<120)){
+  
+  //FUENTES INDUSTRIALES 
+  
+  //TUNJUELITO
+  if((ix>55 && iy>0) && (ix<90 && iy<60)){
     return 1;
   }
-
   //PUENTE ARANDA
-  
   if((ix>70 && iy>120) && (ix<110 && iy<170)){
-    return 2.1;
+    return 0.49; //16.51
   }
-
   //Kenedy
-  
-  if((ix>20 && iy>120) && (ix<70 && iy<170)){
-    return 1.8;
+  if((ix>0 && iy>60) && (ix<80 && iy<120)){
+    return 0.61; //20.60
   }
-
   //Fontibon
-   if((ix>20 && iy>170) && (ix<80 && iy<200)){
-     return 2.3;
+  if((ix>0 && iy>120) && (ix<80 && iy<160)){
+    return 0.57;//19.05
   }
-
-   //Engativa
-   
-   if((ix>22 && iy>200) && (ix<80 && iy<250)){
-     return 1.3;
- }
-   
-   //Usaquen
-   
- if((ix>145 && iy>250) && (ix<180 && iy<400)){
-   return 0.6;
- }
- 
+  //Engativa
+  if((ix>0 && iy>160) && (ix<80 && iy<250)){
+    return 0.46; //15.38
+  }
+  //Usaquen 
+  if((ix>145 && iy>250) && (ix<180 && iy<400)){
+    return 0.37; //12.49
+  }
  //Suba
-
- if((ix>50 && iy>250) && (ix<145 && iy<400)){
-   return 0.5;
+ if((ix>0 && iy>250) && (ix<145 && iy<400)){
+   return 0.45; //15.33
  }
- 
-  else
-    return 0;
+ // Colina
+ if((ix>0 && iy>250) && (ix<145 && iy<400)){
+   return 0.45; //15.33
+ }
+ // cIUDAD bOLIVAR
+ if((ix>0 && iy>0) && (ix<55 && iy<60)){
+   return 0.57; //19.30
+  }
+ // Carvajal -Sevillana
+ if((ix>040 && iy>50) && (ix<65 && iy<70)){
+   return 1; //33.40
+  }
+ // San Cristobal
+ if (ix>130 && ix <180 && iy>48 && ix<100){
+   return 0.42;
+ }
+ // Colina
+ if (ix>100 && ix<120 && iy>270 && iy<340){
+   return 0.32; //10.94
+ }
+ // Barrios Unidos
+ if(ix>80 && ix<145 && ix>250 && ix<250){
+   return 0.42; //14.92
+ }
+ // Chapinero
+ if(ix>140 && ix<180 && iy>140 && iy<250){
+   return 0.54; //18.31
+ }
+ // Centro
+ if(ix>140 && ix<180 && iy>100 && iy<160){
+   return 0.42; //14.92
+ }
+ // Tunal
+ if(ix>90 && ix<120 && iy>50 && iy<100){
+   return 0.58; //19.39
+ }
+  
+ else
+   return 0;
 } 
 //Forzamiento LBGK
 double LatticeBoltzmann::Si(int ix, int iy, double Ux0, double Uy0, int t, int i){
@@ -323,9 +341,40 @@ void LatticeBoltzmann::Print(const char * NameFile){
   MyFile.close();
 }
 
+//Read Data
+int n_viento(int i, int j){
+    return j*180+i;
+}
+
+void read_data(std::vector<double>& speed_x, std::vector<double>& speed_y){
+    std::string input_line_x, input_line_y;
+    std::ifstream data_x,data_y;
+    std::string segment;
+    data_x.open("viento_x.csv");
+    data_y.open("viento_y.csv");
+    
+    getline(data_x,input_line_x);
+    getline(data_y,input_line_y);
+    std::stringstream line_x(input_line_x);
+    std::stringstream line_y(input_line_y);
+    while (std::getline(line_x,segment,',')){
+        speed_x.push_back(std::stod(segment)/157.0);
+    }
+    while (std::getline(line_y,segment,',')){
+        speed_y.push_back(std::stod(segment)/157.0);
+    }
+    data_x.close();
+    data_y.close();
+}
+
+
 //-----Programa Principal-----
 
 int main(void){
+
+  std::vector<double> speed_x, speed_y;
+  read_data(speed_x,speed_y);
+  //Para leer el dato de viento de la posición [i,j] basta con hacer speed_x[n_viento(i,j)] y speed_y[n_viento(i,j)]
   LatticeBoltzmann Ondas;
   int t, tmax = 2;
   double rho0 = 1.0, Ux0 = 0.2, Uy0 = 0.0; 
@@ -339,6 +388,6 @@ int main(void){
   }
   //Imprima
   Ondas.Print("datos.dat");
-
+  //  cout<<"set pm3d map\n"<<"set size ratio 2\n"<<"set palette defined (0\"#fee0d2\", 1\"#fc9272\", 2\"#de2d26\")\n"<<"set xtics 0,30,180\n"<<"set terminal jpeg enhanced"<<"set output \"try1.jpg\"\n"<<"splot \"datos.dat\n\""<<endl;
   return 0;
 }
