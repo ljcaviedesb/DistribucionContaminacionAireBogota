@@ -15,7 +15,7 @@ const int Ly = 400;
 const int Q = 5;                    //numero de direcciones
 const double W0 = 1.0/3.0;          //cte que define los pesos
 
-const double C = 0.5;               //velocidad de la onda - por estabilidad numerica: C < 0.707 cells/click
+const double C = 1/sqrt(3);               //velocidad de la onda - por estabilidad numerica: C < 0.707 cells/click
 const double C2 = C*C;
 
 const double CoefDiff = 0.05;
@@ -259,8 +259,8 @@ void LatticeBoltzmann::Start(double rho0, double Ux0, double Uy0){
         n0 = n(ix,iy,i);
         f[n0] = feq(rho0,Ux0,Uy0,i);
         Sold[ix][iy][i] = Si(ix,iy,Ux0,Uy0,0,i);
-	Snew[ix][iy][i] = Si(ix, iy, Ux0, Uy0, 1, i);
-        //Snew[ix][iy][i] = Sold[ix][iy][i];
+	//Snew[ix][iy][i] = Si(ix, iy, Ux0, Uy0, 1, i);
+        Snew[ix][iy][i] = Sold[ix][iy][i];
       }
 }  
 //Colision
@@ -333,7 +333,7 @@ void LatticeBoltzmann::Advection(double Ux0, double Uy0, int t){
   for(ix=0;ix<Lx;ix++)      //para cada celda
     for(iy=0;iy<Ly;iy++)
       for(i=0;i<Q;i++){     //en cada direccion
-	//if( (ix==0) || (ix==Lx-1) || (iy==0) || (iy==Ly-1) ){ continue; }
+	if( (ix==0) || (ix==Lx-1) || (iy==0) || (iy==Ly-1) ){ continue; }
         ixnext = (ix+Vx[i]+Lx)%Lx; iynext = (iy+Vy[i]+Ly)%Ly;
 
         //un if que corte las paredes
@@ -343,11 +343,11 @@ void LatticeBoltzmann::Advection(double Ux0, double Uy0, int t){
         //Sold = Snew;
 
 	//Sold[ix][iy][i] = Snew[ixback][iyback][i];
-        Sold[ix][iy][i] = Snew[ix][iy][i];
-        Snew[ix][iy][i] = Si(ix,iy,Ux0,Uy0,t + 1,i);
+        //Sold[ix][iy][i] = Snew[ix][iy][i];
+        //Snew[ix][iy][i] = Si(ix,iy,Ux0,Uy0,t + 1,i);
 	
-        //Sold[ix][iy][i] = Snew[ixback][iyback][i];
-        //Snew[ix][iy][i] = Si(ixnext,iynext,Ux0,Uy0,t,i);
+        Sold[ix][iy][i] = Snew[ixback][iyback][i];
+        Snew[ix][iy][i] = Si(ix,iy,Ux0,Uy0,t,i);
       }
 }
 //Print
@@ -409,16 +409,18 @@ double LatticeBoltzmann::Var(void){
 
 int main(void){
   LatticeBoltzmann Ondas;
-  int t, tmax = 1000;
+  int t, tmax = 100;
   double rho0 = 1.0, Ux0 = 0.0, Uy0 = 0.0; 
 
   Ondas.Start(rho0, Ux0, Uy0);
   //Evolucione
   for(t=1; t<tmax; t++){
+    if (t > 50) {
+      cout << t << '\t' << Ondas.Var() << endl; 
+    }
     Ondas.Collision();
     Ondas.ImposeFields();
     Ondas.Advection(Ux0, Uy0, t);
-    cout << t << '\t' << Ondas.Var() << endl; 
   }
   //Imprima
   //Ondas.Print("datos.dat");
