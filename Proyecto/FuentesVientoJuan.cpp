@@ -146,7 +146,6 @@ double LatticeBoltzmann::S(int ix, int iy, int t){
       return 0.3; //suba
     }
     
-    
     //Fabricas
     if((ix>=138 && ix<=140) && (iy>=270 && iy<=272)){
       return 0.5;            // Bavaria cra 53 # 127
@@ -175,8 +174,6 @@ double LatticeBoltzmann::S(int ix, int iy, int t){
     if((ix>=134 && ix<=136) && (iy>=369 && iy<=371)){
       return 0.5;            // Fabrica Productos Limpieza  cra 12-187 134,369
     }
-    
-    
     //FUENTES INDUSTRIALES 
     
     //TUNJUELITO
@@ -203,46 +200,46 @@ double LatticeBoltzmann::S(int ix, int iy, int t){
     if((ix>145 && iy>250) && (ix<180 && iy<400)){
       return 0.37; //12.49
     }
-  //Suba
-  if((ix>0 && iy>250) && (ix<145 && iy<400)){
-    return 0.45; //15.33
-  }
-  // Colina
-  if((ix>0 && iy>250) && (ix<145 && iy<400)){
-    return 0.45; //15.33
-  }
-  // cIUDAD bOLIVAR
-  if((ix>0 && iy>0) && (ix<55 && iy<60)){
-    return 0.57; //19.30
+    //Suba
+    if((ix>0 && iy>250) && (ix<145 && iy<400)){
+      return 0.45; //15.33
     }
-  // Carvajal -Sevillana
-  if((ix>040 && iy>50) && (ix<65 && iy<70)){
-    return 1; //33.40
+    // Colina
+    if((ix>0 && iy>250) && (ix<145 && iy<400)){
+      return 0.45; //15.33
     }
-  // San Cristobal
-  if (ix>130 && ix <180 && iy>48 && ix<100){
-    return 0.42;
-  }
-  // Colina
-  if (ix>100 && ix<120 && iy>270 && iy<340){
-    return 0.32; //10.94
-  }
-  // Barrios Unidos
-  if(ix>80 && ix<145 && ix>250 && ix<250){
-    return 0.42; //14.92
-  }
-  // Chapinero
-  if(ix>140 && ix<180 && iy>140 && iy<250){
-    return 0.54; //18.31
-  }
-  // Centro
-  if(ix>140 && ix<180 && iy>100 && iy<160){
-    return 0.42; //14.92
-  }
-  // Tunal
-  if(ix>90 && ix<120 && iy>50 && iy<100){
-    return 0.58; //19.39
-  }
+    // cIUDAD bOLIVAR
+    if((ix>0 && iy>0) && (ix<55 && iy<60)){
+      return 0.57; //19.30
+      }
+    // Carvajal -Sevillana
+    if((ix>040 && iy>50) && (ix<65 && iy<70)){
+      return 1; //33.40
+      }
+    // San Cristobal
+    if (ix>130 && ix <180 && iy>48 && ix<100){
+      return 0.42;
+    }
+    // Colina
+    if (ix>100 && ix<120 && iy>270 && iy<340){
+      return 0.32; //10.94
+    }
+    // Barrios Unidos
+    if(ix>80 && ix<145 && ix>250 && ix<250){
+      return 0.42; //14.92
+    }
+    // Chapinero
+    if(ix>140 && ix<180 && iy>140 && iy<250){
+      return 0.54; //18.31
+    }
+    // Centro
+    if(ix>140 && ix<180 && iy>100 && iy<160){
+      return 0.42; //14.92
+    }
+    // Tunal
+    if(ix>90 && ix<120 && iy>50 && iy<100){
+      return 0.58; //19.39
+    }
   else return 0;
  }   
  else
@@ -282,7 +279,7 @@ void LatticeBoltzmann::Collision(std::vector<double>& speed_x, std::vector<doubl
   for(ix=0;ix<Lx;ix++)      //para cada celda
     for(iy=0;iy<Ly;iy++){
       //Calcule los campos macroscopicos en la celda
-      rho0 = 0.85*rho(ix,iy,false);
+      rho0 = 0.95*rho(ix,iy,false);
       for(i=0;i<Q;i++){     //para cada vector de velocidad
         n0 = n(ix,iy,i);
         double Ux0=speed_x[n_viento(ix,iy)];
@@ -297,7 +294,7 @@ void LatticeBoltzmann::Collision(std::vector<double>& speed_x, std::vector<doubl
 
 void LatticeBoltzmann::ImposeFields(void){
   int ix,iy,i,n0;
-  for(ix=0,iy=0;iy<Ly;iy++) //Pared izquierda
+  /*for(ix=0,iy=0;iy<Ly;iy++) //Pared izquierda
     for(i=0;i<Q;i++){
       n0=n(ix,iy,i);
       fnew[n0]=feq(1.0,0,0,i);
@@ -316,7 +313,7 @@ void LatticeBoltzmann::ImposeFields(void){
     for(i=0;i<Q;i++){
       n0=n(ix,iy,i);
       fnew[n0]=feq(1.0,0,0,i);
-    }
+    }*/
 }
 
 
@@ -326,7 +323,7 @@ void LatticeBoltzmann::Advection(std::vector<double>& speed_x, std::vector<doubl
   for(ix=0;ix<Lx;ix++)      //para cada celda
     for(iy=0;iy<Ly;iy++)
       for(i=0;i<Q;i++){     //en cada direccion
-	      if( (ix==0) || (ix==Lx-1) || (iy==0) || (iy==Ly-1) ){ continue; }
+	      //if( (ix==0) || (ix==Lx-1) || (iy==0) || (iy==Ly-1) ){ continue; }
           ixnext = (ix+Vx[i]+Lx)%Lx; iynext = (iy+Vy[i]+Ly)%Ly;
           //un if que corte las paredes
           n0 = n(ix,iy,i); n0next = n(ixnext,iynext,i);
@@ -381,7 +378,7 @@ void read_data(std::vector<double>& speed_x, std::vector<double>& speed_y){
 
 int main(void){
   LatticeBoltzmann Ondas;
-  int t, tmax = 5;
+  int t, tmax = 50;
   double rho0 = 1.0; 
   std::vector<double> speed_x, speed_y;
   read_data(speed_x,speed_y);
