@@ -91,7 +91,7 @@ double LatticeBoltzmann::Jy(int ix, int iy, bool UseNew){
 //Trve Forzamiento
 double LatticeBoltzmann::S(int ix, int iy, int t){
 
-  if (iy==100 && ix==100) {
+  if ((iy<Ly/2+4 && ix<Lx/2+4) && (iy>Ly/2-4 && ix>Lx/2-4)) {
     return 1.0;
   }
   
@@ -275,7 +275,7 @@ void LatticeBoltzmann::Collision(void){
       //Ux0 = Jx(ix,iy,false)/rho0; Uy0 = Jy(ix,iy,false)/rho0;
       for(i=0;i<Q;i++){     //para cada vector de velocidad
         n0 = n(ix,iy,i);
-        fnew[n0] = UmUtau*f[n0]+Utau*feq(rho0,Ux0,Uy0,i)+(3.0*Snew[ix][iy][i])/2.0-Sold[ix][iy][i]/2.0; // con forzamiento
+        fnew[n0] = 0.95*UmUtau*f[n0]+Utau*feq(rho0,Ux0,Uy0,i)+(3.0*Snew[ix][iy][i])/2.0-Sold[ix][iy][i]/2.0; // con forzamiento
 	//fnew[n0]=UmUtau*f[n0]+Utau*feq(rho0,Ux0,Uy0,i); // tradicional
       }
     }  
@@ -377,10 +377,11 @@ double LatticeBoltzmann::Var(void){
       N +=  rho(ix, iy, true);
     }
   }
+  N=N-Lx*Ly;
 
   for (ix = 0; ix < Lx; ix++) {
     for (iy = 0; iy < Ly; iy++) {
-      ixprom +=  rho(ix, iy, true)*ix;
+      ixprom +=  rho(ix, iy, true)*ix-1;
     }
   }
 
@@ -388,7 +389,7 @@ double LatticeBoltzmann::Var(void){
 
   for (ix = 0; ix < Lx; ix++) {
     for (iy = 0; iy < Ly; iy++) {
-      iyprom +=  rho(ix, iy, true)*iy;
+      iyprom +=  rho(ix, iy, true)*iy-1;
     }
   }
 
@@ -396,11 +397,11 @@ double LatticeBoltzmann::Var(void){
   
   for (ix = 0; ix < Lx; ix++) {
     for (iy = 0; iy < Ly; iy++) {
-      sum += rho(ix, iy, true) * (pow(ix - ixprom, 2) + pow(iy - iyprom, 2));
+      sum += (rho(ix, iy, true)-1) * (pow(ix - ixprom, 2) + pow(iy - iyprom, 2));
     }
   }
 
-  var = sum/N;
+  var = sum/(N-1);
 
   return var;
 }
@@ -409,7 +410,7 @@ double LatticeBoltzmann::Var(void){
 
 int main(void){
   LatticeBoltzmann Ondas;
-  int t, tmax = 1000;
+  int t, tmax = 30;
   double rho0 = 1.0, Ux0 = 0.0, Uy0 = 0.0; 
 
   Ondas.Start(rho0, Ux0, Uy0);
