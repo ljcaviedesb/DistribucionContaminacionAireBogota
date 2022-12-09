@@ -148,31 +148,31 @@ double LatticeBoltzmann::S(int ix, int iy, int t){
     
     //Fabricas
     if((ix>=138 && ix<=140) && (iy>=270 && iy<=272)){
-      return 0.5;            // Bavaria cra 53 # 127
+      return 1;            // Bavaria cra 53 # 127
     }
     if((iy>=177 && iy<=179) && (ix>=50 && ix<=52)){
-      return 0.5;            // Industria Nacional de Gaseosas cll 25 # 95
+      return 1;            // Industria Nacional de Gaseosas cll 25 # 95
     }
     if((iy>=100 && iy<=102) && (ix>=70 && ix<=72)){
-      return 0.5;            // General motors cll 56sur # 36
+      return 1;            // General motors cll 56sur # 36
     }
     if((iy>=150 && iy<=152) && (ix>=160 && ix<=162)){
-      return 0.5;            // Diana cra 13 #93
+      return 1;            // Diana cra 13 #93
     }
     if((iy>=245 && iy<=247) && (ix>=145 && ix<=147)){
-      return 0.5;            // Nestle diag 92 # (cra)19
+      return 1;            // Nestle diag 92 # (cra)19
     }
     if((ix>=90 && ix<=92) && (iy>=157 && iy<=159)){
-      return 0.5;            // Cavisan Grupo Sas Calle 2A # 53
+      return 1;            // Cavisan Grupo Sas Calle 2A # 53
     }
     if((ix>=29 && ix<=31) && (iy>=154 && iy<=156)){
-      return 0.5;            //Mezcladores Industriales Cra 2 # 5
+      return 1;            //Mezcladores Industriales Cra 2 # 5
     }
     if((ix>=38 && ix<=40) && (iy>=233 && iy<=235)){
-      return 0.5;            // Fabrica Maquinarias  cl 64 # 110 38,233
+      return 1;            // Fabrica Maquinarias  cl 64 # 110 38,233
     }
     if((ix>=134 && ix<=136) && (iy>=369 && iy<=371)){
-      return 0.5;            // Fabrica Productos Limpieza  cra 12-187 134,369
+      return 1;            // Fabrica Productos Limpieza  cra 12-187 134,369
     }
     //FUENTES INDUSTRIALES 
     
@@ -378,7 +378,7 @@ void read_data(std::vector<double>& speed_x, std::vector<double>& speed_y){
 
 int main(void){
   LatticeBoltzmann Ondas;
-  int t, tmax = 50;
+  int t, tmax = 30;
   double rho0 = 1.0; 
   std::vector<double> speed_x, speed_y;
   read_data(speed_x,speed_y);
